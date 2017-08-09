@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Glyph = require('Glyph');
+const Glyph = require('./Glyph');
 
 const Schema = mongoose.Schema;
 

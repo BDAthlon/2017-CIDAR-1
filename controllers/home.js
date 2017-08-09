@@ -8,3 +8,11 @@ exports.index = (req, res) => {
     layout: 'layout'
   });
 };
+
+exports.newglyph = function (req, res) {
+    res.render('submitglyph', { title: 'Submit Glyph', layout: 'layout' })
+};
+
+exports.browse = function (req, res) {
+    res.render('browse', { title : 'Browse' });
+}
