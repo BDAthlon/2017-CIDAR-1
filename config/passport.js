@@ -17,13 +17,13 @@ passport.deserializeUser((id, done) => {
 /**
  * Sign in using Email and Password.
  */
-passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-  User.findOne({ email: email.toLowerCase() }, (err, user) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done){
+  User.findOne({ email: email.toLowerCase() }, function(err, user){
     if (err) { return done(err); }
     if (!user) {
       return done(null, false, { msg: `Email ${email} not found.` });
     }
-    user.comparePassword(password, (err, isMatch) => {
+    user.comparePassword(password, function(err, isMatch){
       if (err) { return done(err); }
       if (isMatch) {
         return done(null, user);
@@ -48,7 +48,7 @@ exports.isAuthenticated = (req, res, next) => {
 /**
  * Authorization Required middleware.
  */
-exports.isAuthorized = (req, res, next) => {
+exports.isAuthorized = function(req, res, next){
   const provider = req.path.split('/').slice(-1)[0];
   const token = req.user.tokens.find(token => token.kind === provider);
   if (token) {

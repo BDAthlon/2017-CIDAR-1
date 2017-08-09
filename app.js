@@ -148,17 +148,16 @@ app.get('/api/v1/ping', apiController.ping);
 app.get('/api/v1/glyph', apiController.getGlyph);
 app.post('/api/v1/glyph', upload.single('payload'), apiController.createGlyph);
 app.delete('/api/v1/glyph', apiController.deleteGlyph);
-app.put('/api/v1/glyph', apiController.updateGlyph);
+app.put('/api/v1/glyph', upload.single('payload'), apiController.updateGlyph);
 
 app.get('/api/v1/library', apiController.getLibrary);
 app.post('/api/v1/library', apiController.createLibrary);
-app.delete('/api/v1/libray', apiController.deleteLibrary);
+app.delete('/api/v1/library', apiController.deleteLibrary);
 app.put('/api/v1/library', apiController.updateLibrary);
 
 app.get('/api/v1/search/glyphs', apiController.searchGlyphs);
 app.get('/api/v1/search/libraries', apiController.searchLibraries);
 app.get('/api/v1/search/users', apiController.searchUsers);
-
 
 app.get('/api/v1/user', apiController.getUserContent);
 
@@ -171,7 +170,7 @@ app.use(errorHandler());
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), function(){
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env')); 
   console.log('  Press CTRL-C to stop\n');
 });

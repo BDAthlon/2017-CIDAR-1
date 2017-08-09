@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Glyph = require('Glyph');
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 
 const vGlyphSchema = new mongoose.Schema({
@@ -28,6 +28,8 @@ vGlyphSchema.methods.createNewVLibaray = function createNewLibrary(libraryname) 
 vGlyphSchema.methods.createNewGlyphVersion = function createNewGlyphVersion(userid, svg) {
     console.log("Creating a new version of the Glyph for this glyph");
     var newglyph = Glyph({payload: svg, author: userid});
+    this.glyphs.push(newglyph);
+    this.save();
 }
 
 const VGlyph = mongoose.model('VGlyph', vGlyphSchema);
