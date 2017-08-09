@@ -1,3 +1,40 @@
+# Glify
+
+Glify is an open source platfrom for sharing and curating SBOL glyphs
+used in the SBOL standard. The platform uses a Github like approach for
+building up the libraries where the users and organizations can upload
+individual glyphs or curate different sets of glyphs in the form of
+collections. As a baseline attempt we want to model the popularity of
+the Glyph / Library by counting the total number of reactions to each
+of the entities.
+
+## Standard Interchange Formats
+
+Glify only accepts an SVG format for the Glyph. We believe this will
+start enforcing proper guidelines onto how we should go about creating
+and sharing glyphs in the community.
+
+## Targets
+
+The things we wanted to complete and the status of these things.
+
+- Web App Routing : Partially complete
+- Mongo DB Data Model :  Complete
+- CRUD REST API  : Partially Complete
+- UI : Partial Mockups Completed
+- Frontend Controllers : Not Started
+- Authentication : Complete (Has some obvious bugs)
+
+
+## Environment Variables
+
+Populate the environment file (.env)
+
+```
+MONGOLAB_URI=CONNECTION STRING
+SESSION_SECRET = "WHATEVER THIS IS GOING TO BE"
+
+```
 
 Getting Started
 ---------------
@@ -40,6 +77,13 @@ Project Structure
 | **controllers**/home.js            | Controller for home page (index).                            |
 | **controllers**/user.js            | Controller for user account management.                      |
 | **models**/User.js                 | Mongoose schema and model for User.                          |
+| **models**/Organization.js         | Mongoose schema and model for Organization.                          |
+| **models**/VGlyph.js               | Mongoose schema and model for VGlyph.                          |
+| **models**/VLibrary.js             | Mongoose schema and model for VLibrary.                          |
+| **models**/Glyph.js                | Mongoose schema and model for Glyph.                          |
+| **models**/Library.js              | Mongoose schema and model for Library.                          |
+| **models**/Comment.js              | Mongoose schema and model for Comment.                          |
+| **models**/Issue.js                | Mongoose schema and model for Issue.                          |
 | **public**/                        | Static assets (fonts, css, js, img).                         |
 | **public**/**js**/application.js   | Specify client-side JavaScript dependencies.                 |
 | **public**/**js**/main.js          | Place your client-side JavaScript here.                      |
@@ -47,11 +91,13 @@ Project Structure
 | **public/css/themes**/default.scss | Some Bootstrap overrides to make it look prettier.           |
 | **views/account**/                 | Templates for *login, password reset, signup, profile*.      |
 | **views/api**/                     | Templates for API Examples.                                  |
-| **views/partials**/flash.pug       | Error, info and success flash notifications.                 |
-| **views/partials**/header.pug      | Navbar partial template.                                     |
-| **views/partials**/footer.pug      | Footer partial template.                                     |
-| **views**/layout.pug               | Base template.                                               |
-| **views**/home.pug                 | Home page template.                                          |
+| **views/partials**/flash.hbs       | Error, info and success flash notifications.                 |
+| **views/partials**/header.hbs      | Navbar partial template.                                     |
+| **views/partials**/footer.hbs      | Footer partial template.                                     |
+| **views**/layout.hbs               | Base template.                                               |
+| **views**/home.hbs                 | Home page template.                                          |
+| **views**/browse.hbs               | Browse page template.                                          |
+| **views**/submitglyph.hbs          | Upload page template.                                          |
 | .env.example                       | Your API keys, tokens, passwords and database URI.           |
 | app.js                             | The main application file.                                   |
 | package.json                       | NPM dependencies.                                            |
@@ -131,7 +177,7 @@ User.aggregate({ $group: { _id: null, total: { $sum: '$votes' } } }, (err, votes
   console.log(votesCount.total);
 });
 ```
-:top: <sub>[**back to top**](#table-of-contents)</sub>
+
 
 
 # Attribution
